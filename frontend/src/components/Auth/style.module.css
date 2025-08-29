@@ -1,0 +1,125 @@
+.authOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--auth-bg-overlay);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.authModal {
+    background: var(--auth-bg-modal);
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: var(--auth-shadow);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    animation: slideUp 0.5s ease;
+}
+
+.logo {
+    margin-bottom: 24px;
+}
+
+.logo svg {
+    color: var(--auth-border-focused);
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: var(--auth-text-primary);
+}
+
+.subtitle {
+    font-size: 16px;
+    color: var(--auth-text-secondary);
+    margin: 0 0 32px 0;
+    line-height: 1.5;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.inputContainer {
+    position: relative;
+}
+
+.input {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid var(--auth-border);
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    background: var(--auth-bg-modal);
+    color: var(--auth-text-primary);
+}
+
+.input:focus {
+    border-color: var(--auth-border-focused);
+}
+
+.input::placeholder {
+    color: var(--auth-text-placeholder);
+}
+
+.submitButton {
+    background: var(--auth-gradient-primary);
+    color: white;
+    border: none;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.submitButton:hover:not(:disabled) {
+    background: var(--auth-gradient-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--auth-shadow-button);
+}
+
+.submitButton:disabled {
+    background: var(--auth-bg-disabled);
+    color: var(--auth-text-disabled);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.footer {
+    margin-top: 24px;
+}
+
+.hint {
+    font-size: 12px;
+    color: var(--auth-text-secondary);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

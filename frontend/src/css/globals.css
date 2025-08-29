@@ -1,0 +1,173 @@
+:root {
+    color-scheme: light dark;
+
+    /* Единая цветовая палитра */
+    --bg-primary: #1c1c1e;
+    --bg-secondary: #2c2c2e;
+    --bg-tertiary: #3a3a3c;
+
+    --text-primary: #ffffff;
+    --text-secondary: #8e8e93;
+    --text-tertiary: #636366;
+
+    --border-primary: #3a3a3c;
+    --border-secondary: #48484a;
+
+    --accent-primary: #0a84ff;
+    --accent-primary-hover: #0066cc;
+    --accent-primary-active: #004d99;
+
+    --gradient-primary: linear-gradient(135deg, #0a84ff, #0066cc);
+    --gradient-accent: linear-gradient(135deg, #0a84ff, #0066cc);
+
+    /* Chat */
+    --chat-bg: var(--bg-primary);
+    --chat-container-bg: var(--bg-secondary);
+    --chat-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+
+    --chat-text-head: var(--text-primary);
+    --chat-border-head: var(--border-primary);
+
+    --chat-bg-messages: var(--bg-secondary);
+    --chat-border-messages: var(--border-primary);
+
+    --chat-bg-input: var(--bg-secondary);
+    --chat-text-input: var(--text-primary);
+    --chat-border-input: var(--border-primary);
+
+    --chat-icon-fill: var(--bg-primary);
+    --chat-bg-btn: var(--accent-primary);
+    --chat-bg-btn-hover: var(--accent-primary-hover);
+
+    --chat-text-message-own: var(--text-primary);
+    --chat-text-message-other: var(--text-primary);
+    --chat-bg-message-own: var(--gradient-accent);
+    --chat-bg-message-other: var(--bg-tertiary);
+    --chat-text-message-senderName: var(--text-secondary);
+    --chat-text-message-timestamp: var(--text-secondary);
+
+    /* Auth  */
+    --auth-overlay-bg: rgba(28, 28, 30, 0.95);
+    --auth-modal-bg: var(--bg-secondary);
+    --auth-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+
+    --auth-text-primary: var(--text-primary);
+    --auth-text-secondary: var(--text-secondary);
+    --auth-text-placeholder: var(--text-tertiary);
+
+    --auth-border: var(--border-primary);
+    --auth-border-focused: var(--accent-primary);
+
+    --auth-btn-bg: var(--gradient-primary);
+    --auth-btn-bg-hover: linear-gradient(135deg, #0066cc, #004d99);
+    --auth-btn-shadow: 0 8px 20px rgba(10, 132, 255, 0.3);
+
+    --auth-bg-disabled: var(--bg-tertiary);
+    --auth-text-disabled: var(--text-tertiary);
+}
+
+body {
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color: rgba(255, 255, 255, 0.87);
+    background-color: var(--bg-color);
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reset and base styles  */
+* {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+}
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+/* Links */
+a,
+a:link,
+a:visited {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+/* Common */
+aside,
+nav,
+footer,
+header,
+section,
+main {
+    display: block;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-size: inherit;
+    font-weight: inherit;
+}
+ul,
+ul li {
+    list-style: none;
+}
+img {
+    vertical-align: top;
+}
+img,
+svg {
+    max-width: 100%;
+    height: auto;
+}
+address {
+    font-style: normal;
+}
+/* Form */
+input,
+textarea,
+button,
+select {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background-color: transparent;
+}
+input::-ms-clear {
+    display: none;
+}
+button,
+input[type='submit'] {
+    display: inline-block;
+    box-shadow: none;
+    background-color: transparent;
+    background: none;
+    cursor: pointer;
+}
+input:focus,
+input:active,
+button:focus,
+button:active {
+    outline: none;
+}
+button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+label {
+    cursor: pointer;
+}
+legend {
+    display: block;
+}

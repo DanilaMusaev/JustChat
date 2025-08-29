@@ -1,0 +1,22 @@
+/* App */
+.appWrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Chat block */
+
+.chatBlock {
+    display: flex;
+    flex-direction: column;
+    min-width: 500px;
+
+    box-shadow: var(--chat-shadow);
+    background-color: var(--chat-bg);
+    border-radius: 10px;
+
+    overflow: hidden;
+}
