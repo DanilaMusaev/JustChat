@@ -4,29 +4,31 @@ import { Chat } from './components/Chat/Chat';
 import { ChatHead } from './components/ChatHead/ChatHead';
 import { ChatInput } from './components/ChatInput/ChatInput';
 import { Auth } from './components/Auth/Auth';
+import type { IMessage } from './shared/types/types';
 
 function App() {
     const [currentUsername, setCurrentUsername] = useState<string | null>(null);
-    const mockMessages = [
+    const mockMessages: IMessage[] = [
         {
             id: '1',
             text: 'Привет! Как дела?',
-            isOwn: false,
+            senderId: 'nonUser',
             timestamp: new Date(Date.now() - 1000000),
-            senderName: 'Друг',
+            status: 'read',
         },
         {
             id: '2',
             text: 'Привет! Всё отлично, спасибо!',
-            isOwn: true,
+            senderId: 'userId',
             timestamp: new Date(Date.now() - 500000),
+            status: 'read',
         },
         {
             id: '3',
             text: 'Отлично! Что нового?',
-            isOwn: false,
+            senderId: 'nonUser',
             timestamp: new Date(),
-            senderName: 'Друг',
+            status: 'read',
         },
     ];
 

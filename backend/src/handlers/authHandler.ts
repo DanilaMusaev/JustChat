@@ -34,7 +34,11 @@ export class AuthHandler {
         ws.send(
             JSON.stringify({
                 type: 'auth__success',
-                payload: { userId, username: user.username },
+                payload: {
+                    userId,
+                    username: user.username,
+                    status: user.status,
+                },
             })
         );
         // Отсылаем список всех пользователей, которые сейчас онлайн

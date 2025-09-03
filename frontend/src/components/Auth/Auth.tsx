@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styles from './style.module.css';
+import Icon from '../Icon';
 
 interface AuthProps {
     onLogin: (username: string) => void;
@@ -20,14 +21,7 @@ export const Auth = ({ onLogin }: AuthProps) => {
         <div className={styles.authOverlay}>
             <div className={styles.authModal}>
                 <div className={styles.logo}>
-                    <svg
-                        width="48"
-                        height="48"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                    >
-                        <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
-                    </svg>
+                    <Icon name="auth_logo" />
                 </div>
 
                 <h1 className={styles.title}>Добро пожаловать в чат</h1>
@@ -60,14 +54,7 @@ export const Auth = ({ onLogin }: AuthProps) => {
                         className={styles.submitButton}
                     >
                         Войти в чат
-                        <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                        >
-                            <path d="M10 17l5-5-5-5v10z" />
-                        </svg>
+                        <Icon name="auth_enter" className={styles.enterIcon} />
                     </button>
                 </form>
 

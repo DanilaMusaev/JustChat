@@ -28,6 +28,8 @@
 }
 
 .logo svg {
+    width: 48px;
+    height: 48px;
     color: var(--auth-border-focused);
 }
 
@@ -102,6 +104,11 @@
     color: var(--auth-text-disabled);
     cursor: not-allowed;
     transform: none;
+}
+
+.enterIcon {
+    width: 16px;
+    height: 16px;
 }
 
 .footer {

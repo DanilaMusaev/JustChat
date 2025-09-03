@@ -1,9 +1,9 @@
-import type { MessageType } from '../../shared/types/message.interface';
+import type { IMessage } from '../../shared/types/types';
 import { Message } from '../Message/Message';
 import styles from './style.module.css';
 
 type Props = {
-    messages?: MessageType[];
+    messages?: IMessage[];
 };
 
 export const Chat = ({ messages }: Props) => {
@@ -16,9 +16,8 @@ export const Chat = ({ messages }: Props) => {
                     <Message
                         key={message.id}
                         text={message.text}
-                        isOwn={message.isOwn}
+                        isOwn={message.senderId === 'userId'}
                         timestamp={message.timestamp}
-                        senderName={message.senderName}
                     />
                 ))
             )}
