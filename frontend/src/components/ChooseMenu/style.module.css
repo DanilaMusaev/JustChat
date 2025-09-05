@@ -1,0 +1,46 @@
+.chooseMenu {
+    padding: 8px;
+    border-radius: 12px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--choose-text-primary);
+}
+
+.titleIcon {
+    color: var(--choose-icon);
+    width: 30px;
+    height: 30px;
+}
+
+.titleIconWrapper {
+    text-align: center;
+}
+
+.chooseList {
+    margin-top: 20px;
+    display: grid;
+    row-gap: 10px;
+}
+
+.chooseTab {
+    padding: 6px 15px;
+
+    font-size: 18px;
+    color: var(--choose-text-secondary);
+
+    border-radius: 8px;
+    border: 1px solid var(--choose-border);
+
+    cursor: pointer;
+
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.chooseTab:hover {
+    border-color: var(--choose-border-hover);
+    transform: translateY(-2px);
+}

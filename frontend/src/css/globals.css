@@ -46,6 +46,15 @@
     --chat-text-message-senderName: var(--text-secondary);
     --chat-text-message-timestamp: var(--text-secondary);
 
+    /* Choose menu */
+    --choose-icon: var(--accent-primary);
+
+    --choose-border: var(--border-primary);
+    --choose-border-hover: var(--accent-primary);
+
+    --choose-text-primary: var(--text-primary);
+    --choose-text-secondary: var(--text-secondary);
+
     /* Auth  */
     --auth-overlay-bg: rgba(28, 28, 30, 0.95);
     --auth-modal-bg: var(--bg-secondary);

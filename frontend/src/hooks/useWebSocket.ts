@@ -61,7 +61,7 @@ export const useWebSocket = (url: string) => {
                 break;
 
             case 'chat_started':
-                // Для старта чата, но надо сначала реализовать выбор чатов
+                // Начали чат
                 break;
 
             case 'new_chat_notification':
