@@ -1,10 +1,20 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import type { Conversation, User, WSMessage } from '../shared/types/types';
+import {
+    isAuthSuccessMessage,
+    isChatStartedMessage,
+    isErrorMessage,
+    isMessageSentMessage,
+    isNewChatNotificationMessage,
+    isNewMessageMessage,
+    isUsersListMessage,
+} from '../guards/typeGuards';
 
 export const useWebSocket = (url: string) => {
     const [isConnected, setIsConnected] = useState(false);
     const [users, setUsers] = useState<User[]>([]);
-    const [conversations, __] = useState<Conversation[]>([]);
+    const [conversations, setConversations] = useState<Conversation[]>([]);
+    const [conversationId, setConversationId] = useState<string | null>(null);
     const [currentUser, setCurrentUser] = useState<User | null>(null);
     const ws = useRef<WebSocket | null>(null);
 
@@ -51,37 +61,33 @@ export const useWebSocket = (url: string) => {
 
     // Обработка сообщений от сервера
     const handleServerMessage = useCallback((message: WSMessage) => {
-        switch (message.type) {
-            case 'auth_success':
-                setCurrentUser(message.payload);
-                break;
-
-            case 'users_list':
-                setUsers(message.payload.users);
-                break;
-
-            case 'chat_started':
-                // Начали чат
-                break;
-
-            case 'new_chat_notification':
-                // Уведомление, что с тобой начали чат. Возможно, будет не нужно
-                break;
-
-            case 'new_message':
-                // Пришло новое сообщение
-                break;
-
-            case 'message_sent':
-                // Ответ от сервака, что сообщение было отправлено
-                break;
-
-            case 'error':
-                console.error('Server error:', message.payload.message);
-                break;
-
-            default:
-                console.warn('Unknown message type:', message.type);
+        // Проверки по typeGuard
+        if (isAuthSuccessMessage(message)) {
+            setCurrentUser({
+                id: message.payload.userId,
+                username: message.payload.username,
+                status: message.payload.status,
+            });
+            console.log(message);
+        } else if (isUsersListMessage(message)) {
+            setUsers(message.payload.users);
+            console.log(message);
+        } else if (isChatStartedMessage(message)) {
+            setConversationId(message.payload.conversationId);
+            console.log(message);
+        } else if (isNewChatNotificationMessage(message)) {
+            // Уведомление, что с тобой начали чат. Возможно, будет не нужно
+            console.log(message);
+        } else if (isNewMessageMessage(message)) {
+            // Уведомление, что пришло сообщение
+            console.log(message);
+        } else if (isMessageSentMessage(message)) {
+            // Уведомление, что твое сообщение было доставлено
+            console.log(message);
+        } else if (isErrorMessage(message)) {
+            console.error('Server error:', message.payload.message);
+        } else {
+            console.warn('Unknown message type:', message.type);
         }
     }, []);
 
@@ -131,6 +137,7 @@ export const useWebSocket = (url: string) => {
         isConnected,
         users,
         conversations,
+        conversationId,
         currentUser,
         connect,
         auth,

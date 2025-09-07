@@ -12,8 +12,13 @@
 
 .titleIcon {
     color: var(--choose-icon);
-    width: 30px;
-    height: 30px;
+    fill: none !important;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2px;
+    width: 45px;
+    height: 45px;
 }
 
 .titleIconWrapper {

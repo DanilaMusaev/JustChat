@@ -6,6 +6,7 @@ interface WebSocketContextType {
     isConnected: boolean;
     users: User[];
     conversations: Conversation[];
+    conversationId: string | null;
     currentUser: User | null;
     connect: () => void;
     auth: (username: string) => void;

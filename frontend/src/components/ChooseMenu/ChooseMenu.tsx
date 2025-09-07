@@ -1,16 +1,19 @@
+import { UseWebSocketContext } from '../../context/WebSocketProvider';
 import type { User } from '../../shared/types/types';
 import Icon from '../Icon';
 import styles from './style.module.css';
 
 interface ChooseMenuProps {
-    onlineUsers: User[];
-    tempFunc: (username: string) => void;
+    onlineUsers?: User[];
+    tempFunc: (targetId: string, username: string) => void;
 }
 
 const ChooseMenu: React.FC<ChooseMenuProps> = ({ onlineUsers, tempFunc }) => {
+    const { currentUser } = UseWebSocketContext();
+
     const userChooseHandler = (id: string, username: string) => {
         console.log(id);
-        tempFunc(username);
+        tempFunc(id, username);
     };
 
     return (
@@ -19,20 +22,28 @@ const ChooseMenu: React.FC<ChooseMenuProps> = ({ onlineUsers, tempFunc }) => {
                 <div className={styles.titleIconWrapper}>
                     <Icon name="choose_users" className={styles.titleIcon} />
                 </div>
-                <p>Choose the User you want to chat:</p>
+                <p>
+                    {onlineUsers
+                        ? `Choose the User you want to chat:`
+                        : `No one users online.`}
+                </p>
             </h1>
             <div className={styles.chooseList}>
-                {onlineUsers.map((user) => (
-                    <div
-                        key={`${user.id}`}
-                        className={styles.chooseTab}
-                        onClick={() =>
-                            userChooseHandler(user.id, user.username)
-                        }
-                    >
-                        {user.username}
-                    </div>
-                ))}
+                {onlineUsers
+                    ? onlineUsers
+                          .filter((user) => user.id !== currentUser?.id)
+                          .map((user) => (
+                              <div
+                                  key={`${user.id}`}
+                                  className={styles.chooseTab}
+                                  onClick={() =>
+                                      userChooseHandler(user.id, user.username)
+                                  }
+                              >
+                                  {user.username}
+                              </div>
+                          ))
+                    : `There is no one you can talk to right now, please wait, or try to find someone to talk to again after a while.`}
             </div>
         </div>
     );

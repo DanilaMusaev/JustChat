@@ -44,7 +44,11 @@ export interface TextMessage extends WSMessage {
 // Типы входящих сообщений
 export interface AuthSuccessMessage extends WSMessage {
     type: 'auth_success';
-    payload: { userId: string; username: string };
+    payload: {
+        userId: string;
+        username: string;
+        status: 'online' | 'offline' | 'away';
+    };
 }
 
 export interface UsersListMessage extends WSMessage {
@@ -62,6 +66,41 @@ export interface NewChatNotificationMessage extends WSMessage {
     payload: {
         conversationId: string;
         fromUser: { id: string; username: string };
+        message: string;
+    };
+}
+
+export interface ChatStartedMessage extends WSMessage {
+    type: 'chat_started';
+    payload: {
+        conversationId: string;
+        targetUser: {
+            id: string;
+            username: string;
+        };
+    };
+}
+
+export interface NewMessageMessage extends WSMessage {
+    type: 'new_message';
+    payload: {
+        message: IMessage;
+        conversationId: string;
+        from: string;
+    };
+}
+
+export interface MessageSentMessage extends WSMessage {
+    type: 'message_sent';
+    payload: {
+        message: IMessage;
+        conversationId: string;
+    };
+}
+
+export interface ErrorMessage extends WSMessage {
+    type: 'error';
+    payload: {
         message: string;
     };
 }
