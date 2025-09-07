@@ -33,7 +33,7 @@ export class AuthHandler {
 
         ws.send(
             JSON.stringify({
-                type: 'auth__success',
+                type: 'auth_success',
                 payload: {
                     userId,
                     username: user.username,

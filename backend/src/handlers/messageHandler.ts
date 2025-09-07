@@ -56,7 +56,7 @@ export class MessageHandler {
         // Отправителю шлем, что сообщение оправлено
         ws.send(
             JSON.stringify({
-                type: 'message__sent',
+                type: 'message_sent',
                 payload: {
                     message: newMessage,
                     conversationId,
