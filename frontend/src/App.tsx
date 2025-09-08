@@ -27,7 +27,7 @@ function App() {
     const chatMessages = useMemo(
         () =>
             conversations.find((conv) => conv.id === conversationId)?.messages,
-        [conversationId]
+        [conversationId, conversations]
     );
 
     const loginHandler = (username: string) => {

@@ -45,6 +45,10 @@ export class AuthHandler {
         this.sendUsersList(ws);
     }
 
+    sendOnlineUsers(ws: WebSocket): void {
+        this.sendUsersList(ws);
+    }
+
     private sendUsersList(ws: WebSocket): void {
         // Находим все пользователей, которые сейчас онлайн
         const users = this.userManager.getOnlineUsers().map((user) => ({

@@ -1,5 +1,7 @@
 .chooseMenu {
-    padding: 8px;
+    padding: 12px;
+    max-width: 500px;
+
     border-radius: 12px;
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.4);
 }
@@ -7,6 +9,7 @@
 .title {
     font-size: 24px;
     font-weight: 700;
+    text-align: center;
     color: var(--choose-text-primary);
 }
 

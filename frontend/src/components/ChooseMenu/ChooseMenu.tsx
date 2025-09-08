@@ -23,13 +23,13 @@ const ChooseMenu: React.FC<ChooseMenuProps> = ({ onlineUsers, tempFunc }) => {
                     <Icon name="choose_users" className={styles.titleIcon} />
                 </div>
                 <p>
-                    {onlineUsers
+                    {onlineUsers && onlineUsers.length > 1
                         ? `Choose the User you want to chat:`
                         : `No one users online.`}
                 </p>
             </h1>
             <div className={styles.chooseList}>
-                {onlineUsers
+                {!!onlineUsers && onlineUsers.length > 1
                     ? onlineUsers
                           .filter((user) => user.id !== currentUser?.id)
                           .map((user) => (

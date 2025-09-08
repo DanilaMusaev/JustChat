@@ -17,6 +17,12 @@ export const useWebSocket = (url: string) => {
     const [conversationId, setConversationId] = useState<string | null>(null);
     const [currentUser, setCurrentUser] = useState<User | null>(null);
     const ws = useRef<WebSocket | null>(null);
+    // Ссылка для сохранения актуального состояния currentUser в serverHandleMessage
+    const currentUserRef = useRef<User | null>(null);
+    // Актуализация ссылки
+    useEffect(() => {
+        currentUserRef.current = currentUser;
+    }, [currentUser?.id]);
 
     // Подключение к WebSocket
     const connect = useCallback(() => {
@@ -61,6 +67,7 @@ export const useWebSocket = (url: string) => {
 
     // Обработка сообщений от сервера
     const handleServerMessage = useCallback((message: WSMessage) => {
+        const currentUser = currentUserRef.current;
         // Проверки по typeGuard
         if (isAuthSuccessMessage(message)) {
             setCurrentUser({
@@ -74,15 +81,75 @@ export const useWebSocket = (url: string) => {
             console.log(message);
         } else if (isChatStartedMessage(message)) {
             setConversationId(message.payload.conversationId);
+            setConversations((prev) => {
+                const hasConversation = prev.some(
+                    (conv) => conv.id === message.payload.conversationId
+                );
+                if (!hasConversation && currentUser) {
+                    return [
+                        ...prev,
+                        {
+                            id: message.payload.conversationId,
+                            user1Id: currentUser.id,
+                            user2Id: message.payload.targetUser.id,
+                            messages: [],
+                            createdAt: new Date(),
+                        },
+                    ];
+                }
+                return prev;
+            });
+
             console.log(message);
         } else if (isNewChatNotificationMessage(message)) {
-            // Уведомление, что с тобой начали чат. Возможно, будет не нужно
+            setConversations((prev) => {
+                const hasConversation = prev.some(
+                    (conv) => conv.id === message.payload.conversationId
+                );
+                if (!hasConversation && currentUser) {
+                    return [
+                        ...prev,
+                        {
+                            id: message.payload.conversationId,
+                            user1Id: currentUser.id,
+                            user2Id: message.payload.fromUser.id,
+                            messages: [],
+                            createdAt: new Date(),
+                        },
+                    ];
+                }
+                return prev;
+            });
             console.log(message);
         } else if (isNewMessageMessage(message)) {
-            // Уведомление, что пришло сообщение
+            setConversations((prev) =>
+                prev.map((conv) =>
+                    conv.id === message.payload.conversationId
+                        ? {
+                              ...conv,
+                              messages: [
+                                  ...conv.messages,
+                                  message.payload.message,
+                              ],
+                          }
+                        : conv
+                )
+            );
             console.log(message);
         } else if (isMessageSentMessage(message)) {
-            // Уведомление, что твое сообщение было доставлено
+            setConversations((prev) =>
+                prev.map((conv) =>
+                    conv.id === message.payload.conversationId
+                        ? {
+                              ...conv,
+                              messages: [
+                                  ...conv.messages,
+                                  message.payload.message,
+                              ],
+                          }
+                        : conv
+                )
+            );
             console.log(message);
         } else if (isErrorMessage(message)) {
             console.error('Server error:', message.payload.message);
@@ -124,6 +191,11 @@ export const useWebSocket = (url: string) => {
         [sendMessage]
     );
 
+    // Очистить состояние conversationId
+    const clearConversationId = useCallback(() => {
+        setConversationId(null);
+    }, [setConversationId]);
+
     // Отключение при размонтировании
     useEffect(() => {
         return () => {
@@ -144,5 +216,6 @@ export const useWebSocket = (url: string) => {
         startChat,
         sendTextMessage,
         sendMessage,
+        clearConversationId,
     };
 };

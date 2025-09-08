@@ -12,6 +12,7 @@ interface WebSocketContextType {
     auth: (username: string) => void;
     startChat: (targetUserId: string) => void;
     sendTextMessage: (conversationId: string, text: string) => void;
+    clearConversationId: () => void;
 }
 
 const WS_URL = import.meta.env.VITE_WS_HOST || 'ws://localhost:5000';

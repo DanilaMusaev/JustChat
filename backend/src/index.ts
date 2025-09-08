@@ -27,6 +27,8 @@ function handleMessage(ws: WebSocket, message: WSMessage): void {
     switch (message.type) {
         case 'auth':
             authHandler.handleAuth(ws, message as AuthMessage);
+            // Рассылаем всем, что присоединился новый пользователь.
+            onlineUsersBroadcastMessage();
             break;
         case 'start_chat':
             chatHandler.handleStartChat(ws, message as StartChatMessage);
@@ -41,6 +43,18 @@ function handleMessage(ws: WebSocket, message: WSMessage): void {
                     payload: { message: 'Unknown message type' },
                 })
             );
+    }
+}
+
+// Широковещательная рассылка списка онлайн пользователей(когда появляется/пропадает пользователь)
+function onlineUsersBroadcastMessage() {
+    const clients = Array.from(wss.clients);
+    for (let client of clients) {
+        // Проверка, что это не просто сокет, а именно авторизованный пользователь
+        const user = userManager.getUserByWs(client);
+        if (user) {
+            authHandler.sendOnlineUsers(client);
+        }
     }
 }
 
@@ -67,6 +81,7 @@ wss.on('connection', (ws) => {
         if (user) {
             user.status = 'offline';
             console.log(`User ${user.username} disconnected`);
+            onlineUsersBroadcastMessage();
         }
     });
 

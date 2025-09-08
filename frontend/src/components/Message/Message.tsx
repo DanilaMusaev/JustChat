@@ -18,7 +18,7 @@ export const Message = ({
             <div className={styles.content}>
                 <p className={styles.text}>{text}</p>
                 <span className={styles.timestamp}>
-                    {timestamp.toLocaleTimeString([], {
+                    {new Date(timestamp).toLocaleTimeString([], {
                         hour: '2-digit',
                         minute: '2-digit',
                     })}
