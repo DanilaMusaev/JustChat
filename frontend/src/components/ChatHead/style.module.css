@@ -1,5 +1,9 @@
 .chatHead {
-  padding: 10px 20px;
+  padding: 10px 20px 10px 10px;
+
+  display: flex;
+  column-gap: 10px;
+
   border-bottom: 2px solid var(--chat-border-head);
 }
 
@@ -7,3 +11,22 @@
   color: var(--chat-text-head);
   font-size: 1.5rem;
 }
+
+.backBtn {
+  cursor: pointer;
+}
+
+.backBtn:hover svg {
+  color: var(--chat-bg-btn);
+  transform: rotate(180deg) translateX(2px);
+}
+
+.arrowIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--chat-text-head);
+  transform: rotate(180deg);
+
+  transition: transform 0.5s ease, color 0.2s ease;
+}
+

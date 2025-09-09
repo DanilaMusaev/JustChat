@@ -1,17 +1,16 @@
+import { useNavigate } from 'react-router';
 import { UseWebSocketContext } from '../../context/WebSocketProvider';
 import Icon from '../Icon';
 import styles from './style.module.css';
+import { ROUTES } from '../../constants/routes';
 
-interface ChooseMenuProps {
-    tempFunc: (targetId: string, username: string) => void;
-}
+const ChooseMenu: React.FC = () => {
+    const { currentUser, users } = UseWebSocketContext();
+    const navigation = useNavigate();
 
-const ChooseMenu: React.FC<ChooseMenuProps> = ({ tempFunc }) => {
-    const { currentUser, users, startChat } = UseWebSocketContext();
-
-    const userChooseHandler = (id: string, username: string) => {
+    const userChooseHandler = (id: string) => {
         console.log(id);
-        tempFunc(id, username);
+        navigation(ROUTES.chat.dynamic.getLink(id));
     };
 
     return (
@@ -35,7 +34,7 @@ const ChooseMenu: React.FC<ChooseMenuProps> = ({ tempFunc }) => {
                                   key={`${user.id}`}
                                   className={styles.chooseTab}
                                   onClick={() =>
-                                      userChooseHandler(user.id, user.username)
+                                      userChooseHandler(user.id)
                                   }
                               >
                                   {user.username}

@@ -16,4 +16,7 @@
             <path d="M16 3.13a4 4 0 010 7.75" />
         </g>
     </symbol>
+    <symbol id="icon-arrow_right" viewBox="0 0 24 24">
+        <path d="M10 17l5-5-5-5v10z" />
+    </symbol>
 </svg>
