@@ -1,19 +1,17 @@
 import { useState } from 'react';
+import { UseWebSocketContext } from '../../context/WebSocketProvider';
 import styles from './style.module.css';
 import Icon from '../Icon';
 
-interface AuthProps {
-    onLogin: (username: string) => void;
-}
-
-export const Auth = ({ onLogin }: AuthProps) => {
+export const Auth: React.FC = () => {
+    const {auth} = UseWebSocketContext();
     const [username, setUsername] = useState('');
     const [isFocused, setIsFocused] = useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (username.trim()) {
-            onLogin(username.trim());
+            auth(username.trim());
         }
     };
 
@@ -24,9 +22,9 @@ export const Auth = ({ onLogin }: AuthProps) => {
                     <Icon name="auth_logo" />
                 </div>
 
-                <h1 className={styles.title}>Добро пожаловать в чат</h1>
+                <h1 className={styles.title}>Welcome to OnyxChat</h1>
                 <p className={styles.subtitle}>
-                    Введите ваше имя для начала общения
+                    Enter your name to start chatting.
                 </p>
 
                 <form onSubmit={handleSubmit} className={styles.form}>
@@ -41,7 +39,7 @@ export const Auth = ({ onLogin }: AuthProps) => {
                             onChange={(e) => setUsername(e.target.value)}
                             onFocus={() => setIsFocused(true)}
                             onBlur={() => setIsFocused(false)}
-                            placeholder="Ваше имя"
+                            placeholder="Your name"
                             className={styles.input}
                             maxLength={20}
                             autoFocus
@@ -53,13 +51,13 @@ export const Auth = ({ onLogin }: AuthProps) => {
                         disabled={!username.trim()}
                         className={styles.submitButton}
                     >
-                        Войти в чат
+                        Enter the chat
                         <Icon name="auth_enter" className={styles.enterIcon} />
                     </button>
                 </form>
 
                 <div className={styles.footer}>
-                    <span className={styles.hint}>Максимум 20 символов</span>
+                    <span className={styles.hint}>Max 20 symbols</span>
                 </div>
             </div>
         </div>
