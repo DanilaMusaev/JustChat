@@ -1,0 +1,43 @@
+.notFound {
+    padding: 20px;
+    box-shadow: var(--not-found-shadow);
+}
+
+.content {
+    text-align: center;
+
+}
+
+.content h1 {
+    margin-bottom: 6px;
+
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--not-found-text-primary);
+}
+
+.content p {
+    margin: 5px;
+
+    font-size: 16px;
+    color: var(--not-found-text-secondary);
+}
+
+.content button {
+    color: var(--not-found-btn-text);
+
+    transition: color 0.3s ease;
+}
+
+.content button svg {
+    color: inherit;
+    width: 21px;
+    height: 21px;
+    transform: rotate(180deg);
+
+    transition: color 0.3s ease;
+}
+
+.content button:hover {
+    color: var(--not-found-btn-text-hover)
+}

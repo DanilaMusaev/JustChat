@@ -27,7 +27,7 @@ export const Chat = ({ messages }: Props) => {
         <div className={styles.chatMessages}>
             <div className={styles.chatMessagesWrapper}>
                 {!messages || messages.length === 0 ? (
-                    <div className={styles.noMessages}>Напишите первым!</div>
+                    <div className={styles.noMessages}>Write first!</div>
                 ) : (
                     messages.map((message) => (
                         <Message

@@ -6,6 +6,7 @@
     --bg-secondary: #2c2c2e;
     --bg-tertiary: #3a3a3c;
 
+    --text-base: #ffffffde;
     --text-primary: #ffffff;
     --text-secondary: #8e8e93;
     --text-tertiary: #636366;
@@ -73,6 +74,19 @@
 
     --auth-bg-disabled: var(--bg-tertiary);
     --auth-text-disabled: var(--text-tertiary);
+
+    /* NotFound */
+    --not-found-text-primary: var(--text-primary);
+    --not-found-text-secondary: var(--text-secondary);
+    
+    --not-found-btn-text: var(--text-base);
+    --not-found-btn-icon: var(--text-base);
+    --not-found-btn-text-hover: var(--accent-primary-hover);
+
+    --not-found-bg: var(--bg-secondary);
+    --not-found-border: var(--border-primary);
+
+    --not-found-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 body {
@@ -80,7 +94,7 @@ body {
     line-height: 1.5;
     font-weight: 400;
 
-    color: rgba(255, 255, 255, 0.87);
+    color: var(--text-base);
     background-color: var(--bg-color);
 
     font-synthesis: none;
